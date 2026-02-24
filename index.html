@@ -38,12 +38,13 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      zoom: 0.8;
     }
 
     /* ── Nav bar ── */
     .nav {
       background: var(--nav);
-      height: 56px;
+      height: 84px;
       display: flex;
       align-items: center;
       padding: 0 40px;
@@ -61,7 +62,7 @@
       flex-shrink: 0;
     }
     .nav-logo img {
-      height: 34px;
+      height: 51px;
       width: auto;
       display: block;
     }
@@ -191,69 +192,70 @@
       margin-top: 5px; flex-shrink: 0;
     }
     .conf-card {
-      background: linear-gradient(160deg, #141414 0%, #1e1a0e 100%);
-      border: 1px solid rgba(154,132,50,0.35);
+      background: linear-gradient(160deg, #f9f6ee 0%, #efe8d4 100%);
+      border: 1px solid rgba(154,132,50,0.40);
       padding: 0;
       margin-top: 4px;
       overflow: hidden;
       position: relative;
+      box-shadow: 0 4px 16px rgba(138,120,48,0.12);
     }
     .conf-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #9a8432, #d4ac47, #9a8432);
+      height: 3px;
+      background: linear-gradient(90deg, #8a7830, #c9a84c, #8a7830);
     }
     .conf-head {
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 18px 20px 14px;
-      border-bottom: 1px solid rgba(154,132,50,0.20);
+      border-bottom: 1px solid rgba(154,132,50,0.18);
     }
     .conf-head-icon {
       width: 28px; height: 28px; flex-shrink: 0;
       border-radius: 50%;
-      background: rgba(154,132,50,0.12);
-      border: 1px solid rgba(154,132,50,0.30);
+      background: rgba(138,120,48,0.10);
+      border: 1px solid rgba(138,120,48,0.30);
       display: flex; align-items: center; justify-content: center;
     }
     .conf-head-text {
       font-size: 10px; font-weight: 700;
       letter-spacing: 2.2px; text-transform: uppercase;
-      color: #d4ac47; line-height: 1.3;
+      color: #6b5c24; line-height: 1.3;
     }
     .conf-head-sub {
       font-size: 9.5px; letter-spacing: 0.5px;
-      color: rgba(212,172,71,0.55); text-transform: none;
+      color: rgba(107,92,36,0.65); text-transform: none;
       font-weight: 400; margin-top: 1px;
     }
     .conf-body { padding: 16px 20px 20px; }
     .conf-item {
       display: flex; gap: 10px;
       padding: 9px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(138,120,48,0.10);
     }
     .conf-item:last-child { border-bottom: none; padding-bottom: 0; }
     .conf-item-dot {
       width: 4px; height: 4px; border-radius: 50%;
-      background: #9a8432; margin-top: 7px; flex-shrink: 0;
+      background: #8a7830; margin-top: 7px; flex-shrink: 0;
     }
     .conf-item p {
-      font-size: 11.5px; color: rgba(220,215,200,0.80);
+      font-size: 11.5px; color: var(--text-mid);
       line-height: 1.75; margin: 0;
     }
-    .conf-item strong { color: rgba(212,172,71,0.90); font-weight: 600; }
-    .conf-item a { color: #d4ac47; text-decoration: none; border-bottom: 1px solid rgba(212,172,71,0.30); }
-    .conf-item a:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.40); }
+    .conf-item strong { color: #6b5c24; font-weight: 600; }
+    .conf-item a { color: #8a7830; text-decoration: none; border-bottom: 1px solid rgba(138,120,48,0.35); }
+    .conf-item a:hover { color: var(--text); border-bottom-color: var(--text); }
     .conf-footer {
       margin: 0 20px 16px;
       padding: 10px 12px;
-      background: rgba(154,132,50,0.08);
-      border: 1px solid rgba(154,132,50,0.20);
+      background: rgba(138,120,48,0.08);
+      border: 1px solid rgba(138,120,48,0.18);
       font-size: 10px; letter-spacing: 0.3px;
-      color: rgba(212,172,71,0.65);
+      color: rgba(107,92,36,0.70);
       line-height: 1.6; text-align: center;
     }
 
@@ -488,7 +490,7 @@
 
   <!-- Nav -->
   <nav class="nav">
-    <a class="nav-logo" href="https://www.aurumcapconnect.com/" target="_blank"><img src="https://static.wixstatic.com/media/cd4160_ed931eb6bd3f431e8df8328ed70d66b9~mv2.png" alt="Aurum Capital Connect" height="36" style="display:block;"></a>
+    <a class="nav-logo" href="https://www.aurumcapconnect.com/" target="_blank"><img src="https://static.wixstatic.com/media/cd4160_ed931eb6bd3f431e8df8328ed70d66b9~mv2.png" alt="Aurum Capital Connect" height="54" style="display:block;"></a>
     <a class="nav-link active" href="#">Valuations</a>
     <a class="nav-link" href="https://www.aurumcapconnect.com/services" target="_blank">M&amp;A Advisory</a>
     <a class="nav-link" href="https://www.aurumcapconnect.com/about" target="_blank">About</a>
@@ -545,7 +547,7 @@
         <div class="conf-card">
           <div class="conf-head">
             <div class="conf-head-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 11 12" fill="none"><path d="M5.5 0.5L1 2.2v3.3c0 2.3 1.9 4.5 4.5 5.5 2.6-1 4.5-3.2 4.5-5.5V2.2L5.5 0.5z" stroke="#d4ac47" stroke-width="1.1" fill="rgba(212,172,71,0.15)"/><path d="M3.5 5.8l1.3 1.3 2.7-2.7" stroke="#d4ac47" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 11 12" fill="none"><path d="M5.5 0.5L1 2.2v3.3c0 2.3 1.9 4.5 4.5 5.5 2.6-1 4.5-3.2 4.5-5.5V2.2L5.5 0.5z" stroke="#8a7830" stroke-width="1.1" fill="rgba(138,120,48,0.15)"/><path d="M3.5 5.8l1.3 1.3 2.7-2.7" stroke="#8a7830" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div>
               <div class="conf-head-text">Strict Confidentiality</div>
@@ -896,6 +898,72 @@ function showSec(n){
   document.querySelector('.form-panel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
+/* ── Email validation ── */
+const DISPOSABLE_DOMAINS = new Set([
+  'mailinator.com','guerrillamail.com','tempmail.com','throwaway.email','yopmail.com',
+  'sharklasers.com','guerrillamailblock.com','grr.la','dispostable.com','maildrop.cc',
+  'mailnesia.com','tempail.com','tempr.email','discard.email','trashmail.com',
+  'trashmail.net','trashmail.org','fakeinbox.com','tempinbox.com','temp-mail.org',
+  'getnada.com','emailondeck.com','33mail.com','mailcatch.com','mintemail.com',
+  'mohmal.com','burnermail.io','inboxbear.com','mailsac.com','harakirimail.com',
+  'tmail.com','10minutemail.com','10minute.email','guerrillamail.info','spam4.me',
+  'mytemp.email','disposableemailaddresses.emailmiser.com','mailforspam.com',
+  'safetymail.info','trashymail.com','filzmail.com','mailexpire.com','tempmailaddress.com',
+  'emailfake.com','crazymailing.com','mailnator.com','anonbox.net','jetable.org'
+]);
+
+const ROLE_PREFIXES = new Set([
+  'test','info','admin','support','noreply','no-reply','sales','help','contact',
+  'webmaster','postmaster','abuse','spam','fake','none','null','temp','demo',
+  'example','sample','asdf','qwerty','aaa','bbb','xxx','zzz','nobody'
+]);
+
+const DOMAIN_TYPOS = {
+  'gmial.com':'gmail.com','gmal.com':'gmail.com','gmai.com':'gmail.com',
+  'gamil.com':'gmail.com','gnail.com':'gmail.com','gmail.co':'gmail.com',
+  'gmail.con':'gmail.com','gmaill.com':'gmail.com','gmil.com':'gmail.com',
+  'gmaol.com':'gmail.com','gmali.com':'gmail.com','gmaik.com':'gmail.com',
+  'yahooo.com':'yahoo.com','yaho.com':'yahoo.com','yaoo.com':'yahoo.com',
+  'yahoo.co':'yahoo.com','yahoo.con':'yahoo.com',
+  'outloo.com':'outlook.com','outlok.com':'outlook.com','outlook.co':'outlook.com',
+  'hotmal.com':'hotmail.com','hotmial.com':'hotmail.com','hotmail.co':'hotmail.com',
+  'hotmail.con':'hotmail.com','hotmaill.com':'hotmail.com',
+  'icoud.com':'icloud.com','icloud.co':'icloud.com','icloude.com':'icloud.com',
+  'aol.co':'aol.com','aol.con':'aol.com'
+};
+
+function validateEmail(email){
+  const v = email.trim().toLowerCase();
+  // Basic format
+  if(!/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(v))
+    return {ok:false, msg:'Please enter a valid email address.'};
+  const [local, domain] = v.split('@');
+  // Local part checks
+  if(local.length < 2)
+    return {ok:false, msg:'Email address appears too short.'};
+  if(/^[.\-_]|[.\-_]$/.test(local))
+    return {ok:false, msg:'Email address format is invalid.'};
+  if(/\.{2,}|\-{2,}|_{2,}/.test(local))
+    return {ok:false, msg:'Email address format is invalid.'};
+  // Keyboard mash / gibberish detection
+  if(/^([a-z])\1{3,}/.test(local) || /^(asdf|qwerty|zxcv|1234)/.test(local))
+    return {ok:false, msg:'Please enter your real business email address.'};
+  // Role-based prefix check
+  if(ROLE_PREFIXES.has(local.split(/[.\-_+]/)[0]))
+    return {ok:false, msg:'Please use a personal or business email, not a generic address (e.g., info@, test@).'};
+  // Domain typo suggestions
+  if(DOMAIN_TYPOS[domain])
+    return {ok:false, msg:'Did you mean ' + local + '@' + DOMAIN_TYPOS[domain] + '?'};
+  // Disposable email blocking
+  if(DISPOSABLE_DOMAINS.has(domain))
+    return {ok:false, msg:'Temporary email addresses are not accepted. Please use your business email.'};
+  // TLD length check
+  const tld = domain.split('.').pop();
+  if(tld.length < 2 || tld.length > 12)
+    return {ok:false, msg:'Please enter a valid email address.'};
+  return {ok:true, msg:''};
+}
+
 function check(n){
   const sec=document.querySelector(`[data-sec="${n}"]`);
   let ok=true;
@@ -905,13 +973,19 @@ function check(n){
   });
   if(n===1){
     const em=sec.querySelector('[name=email]');
-    const ve=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value);
-    em.classList.toggle('bad',!ve); if(!ve) ok=false;
+    const result=validateEmail(em.value);
+    em.classList.toggle('bad',!result.ok);
+    if(!result.ok){ ok=false; if(result.msg) showErr(result.msg); }
   }
   return ok;
 }
 
-function goNext(){ if(check(cur)) showSec(cur+1); else showErr('Please complete all required fields.'); }
+function goNext(){
+  if(check(cur)){ showSec(cur+1); return; }
+  // Only show generic error if email validation didn't already show a specific one
+  if(document.getElementById('ebar').style.display!=='block')
+    showErr('Please complete all required fields.');
+}
 function goPrev(){ if(cur>1) showSec(cur-1); }
 
 function showErr(m){
