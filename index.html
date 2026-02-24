@@ -682,6 +682,36 @@
                 <div class="f"><label>Number of Employees</label><input type="number" name="numberOfEmployees" min="0" placeholder="e.g., 45"></div>
                 <div class="f"><label>Headquarters (City, State)</label><input type="text" name="location" placeholder="Denver, CO"></div>
               </div>
+
+              <!-- ═══ NEW: Revenue Mix & End Market (feeds Node 3 coefficient engine) ═══ -->
+              <div class="sec-rule"></div>
+              <div class="row">
+                <div class="f">
+                  <label>What best describes your revenue mix? <span class="r">*</span></label>
+                  <select name="revenueMix" required>
+                    <option value="">Select revenue mix</option>
+                    <option value="recurring">&gt;70% Recurring / Service Contracts</option>
+                    <option value="mixed">30–70% Mixed Project &amp; Service</option>
+                    <option value="project">&gt;70% Project / New Construction</option>
+                  </select>
+                </div>
+                <div class="f">
+                  <label>Who are your primary customers? <span class="r">*</span></label>
+                  <select name="primaryEndMarket" required>
+                    <option value="">Select primary end market</option>
+                    <option value="federal-defense">Federal / Defense Government</option>
+                    <option value="healthcare">Healthcare / Life Sciences</option>
+                    <option value="technology">Technology / Data Centers</option>
+                    <option value="commercial">Commercial / Municipal</option>
+                    <option value="diversified">Diversified</option>
+                    <option value="industrial">Industrial / Manufacturing</option>
+                    <option value="residential">Residential</option>
+                    <option value="oil-gas">Oil &amp; Gas / Energy / Midstream</option>
+                  </select>
+                </div>
+              </div>
+              <!-- ═══ END NEW FIELDS ═══ -->
+
               <div class="row row1">
                 <div class="f"><label>Brief Business Description</label><textarea name="businessDescription" placeholder="Describe your core products or services and the markets you serve..."></textarea></div>
               </div>
@@ -728,7 +758,19 @@
                     <option value="Immediate">Immediate Need</option>
                   </select>
                 </div>
-                <div class="f"><!-- spacer --></div>
+                <!-- ═══ NEW: Customer Concentration (feeds Node 3 coefficient engine) ═══ -->
+                <div class="f">
+                  <label>Top 5 Customer Revenue Share <span class="r">*</span></label>
+                  <select name="customerConcentration" required>
+                    <option value="">Select concentration level</option>
+                    <option value="under-20">Less than 20%</option>
+                    <option value="20-35">20% – 35%</option>
+                    <option value="36-50">36% – 50%</option>
+                    <option value="51-70">51% – 70%</option>
+                    <option value="over-70">Greater than 70%</option>
+                  </select>
+                </div>
+                <!-- ═══ END NEW FIELD ═══ -->
               </div>
 
               <div class="sec-rule"></div>
@@ -966,30 +1008,23 @@ const DOMAIN_TYPOS = {
 
 function validateEmail(email){
   const v = email.trim().toLowerCase();
-  // Basic format
   if(!/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(v))
     return {ok:false, msg:'Please enter a valid email address.'};
   const [local, domain] = v.split('@');
-  // Local part checks
   if(local.length < 2)
     return {ok:false, msg:'Email address appears too short.'};
   if(/^[.\-_]|[.\-_]$/.test(local))
     return {ok:false, msg:'Email address format is invalid.'};
   if(/\.{2,}|\-{2,}|_{2,}/.test(local))
     return {ok:false, msg:'Email address format is invalid.'};
-  // Keyboard mash / gibberish detection
   if(/^([a-z])\1{3,}/.test(local) || /^(asdf|qwerty|zxcv|1234)/.test(local))
     return {ok:false, msg:'Please enter your real business email address.'};
-  // Role-based prefix check
   if(ROLE_PREFIXES.has(local.split(/[.\-_+]/)[0]))
     return {ok:false, msg:'Please use a personal or business email, not a generic address (e.g., info@, test@).'};
-  // Domain typo suggestions
   if(DOMAIN_TYPOS[domain])
     return {ok:false, msg:'Did you mean ' + local + '@' + DOMAIN_TYPOS[domain] + '?'};
-  // Disposable email blocking
   if(DISPOSABLE_DOMAINS.has(domain))
     return {ok:false, msg:'Temporary email addresses are not accepted. Please use your business email.'};
-  // TLD length check
   const tld = domain.split('.').pop();
   if(tld.length < 2 || tld.length > 12)
     return {ok:false, msg:'Please enter a valid email address.'};
@@ -1025,7 +1060,6 @@ function check(n){
 
 function goNext(){
   if(check(cur)){ showSec(cur+1); return; }
-  // Only show generic error if email validation didn't already show a specific one
   if(document.getElementById('ebar').style.display!=='block')
     showErr('Please complete all required fields.');
 }
