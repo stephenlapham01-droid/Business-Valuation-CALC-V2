@@ -405,6 +405,35 @@
     .pnote a { color:var(--gold); text-decoration:none; }
     .pnote a:hover { text-decoration:underline; }
 
+    /* ── Acknowledgment checkbox ── */
+    .ack-wrap {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .ack-wrap:hover { border-color: var(--gold); }
+    .ack-wrap.bad { border-color: var(--danger); box-shadow: 0 0 0 3px rgba(185,28,28,0.07); }
+    .ack-wrap input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--gold);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .ack-wrap span {
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+    .ack-wrap span a { color: var(--gold); text-decoration: none; }
+    .ack-wrap span a:hover { text-decoration: underline; }
+
     /* ── Loading ── */
     .lscreen, .sscreen { display:none; flex-direction:column; align-items:center; justify-content:center; padding:56px 48px 64px; text-align:center; }
     .lscreen.on, .sscreen.on { display:flex; }
@@ -597,7 +626,7 @@
                 <div class="f"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 123-4567"></div>
               </div>
               <div class="row row1">
-                <div class="f"><label>Company Website</label><input type="url" name="website" placeholder="https://www.yourcompany.com"></div>
+                <div class="f"><label>Company Website <span class="r">*</span></label><input type="url" name="website" required placeholder="https://www.yourcompany.com"></div>
               </div>
               <div class="brow">
                 <button type="button" class="btn btn-gold" onclick="goNext()">Continue &#8594;</button>
@@ -732,13 +761,17 @@
                 <div class="f"><label>Additional Comments / Questions</label><textarea name="additionalNotes" placeholder="Share anything else that might help us provide a more accurate valuation..."></textarea></div>
               </div>
 
-              <div class="brow">
-                <button type="button" class="btn btn-outline" onclick="goPrev()">&#8592; Back</button>
-                <button type="submit" class="btn btn-gold">Submit Valuation Request</button>
-              </div>
               <div class="pnote" style="background:#f8f7f4;border:1px solid #e5e2da;border-left:3px solid #8a7830;padding:14px 16px;text-align:left;margin-top:20px;font-size:12px;line-height:1.85;color:#555;">
                 <strong style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#8a7830;">Confidentiality &amp; Advisor Disclosure</strong><br>
                 By submitting this form, you acknowledge that Aurum Capital Connect, LLC is a <strong>licensed M&amp;A advisory firm</strong> and that all information provided is strictly confidential. Your details will not be disclosed to any buyer, investor, or third party without your <strong>explicit written consent</strong>. This submission is <strong>entirely non-binding</strong> and does not constitute a sell-side mandate, listing, or engagement agreement. Aurum Capital Connect operates with full professional discretion in accordance with our <a href="https://www.aurumcapconnect.com/privacy" target="_blank">Privacy Policy</a> and applicable FINRA and securities regulations.
+              </div>
+              <label class="ack-wrap" id="ack-wrap">
+                <input type="checkbox" id="ack-check">
+                <span>I have read and agree to the <strong>Confidentiality &amp; Advisor Disclosure</strong> above. I understand that this submission is non-binding and that my information will be held in strict confidence in accordance with Aurum Capital Connect's <a href="https://www.aurumcapconnect.com/privacy" target="_blank">Privacy Policy</a> and applicable regulations.</span>
+              </label>
+              <div class="brow">
+                <button type="button" class="btn btn-outline" onclick="goPrev()">&#8592; Back</button>
+                <button type="submit" class="btn btn-gold">Submit Valuation Request</button>
               </div>
             </div>
 
@@ -976,6 +1009,17 @@ function check(n){
     em.classList.toggle('bad',!result.ok);
     if(!result.ok){ ok=false; if(result.msg) showErr(result.msg); }
   }
+  if(n===3){
+    const ack=document.getElementById('ack-check');
+    const wrap=document.getElementById('ack-wrap');
+    if(!ack.checked){
+      wrap.classList.add('bad');
+      ok=false;
+      showErr('Please read and accept the Confidentiality & Advisor Disclosure to continue.');
+    } else {
+      wrap.classList.remove('bad');
+    }
+  }
   return ok;
 }
 
@@ -1018,6 +1062,7 @@ document.getElementById('vform').addEventListener('submit',async function(e){
 });
 
 document.querySelectorAll('input,select,textarea').forEach(f=>f.addEventListener('input',()=>f.classList.remove('bad')));
+document.getElementById('ack-check').addEventListener('change',function(){ document.getElementById('ack-wrap').classList.remove('bad'); });
 </script>
 </body>
 </html>
